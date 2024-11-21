@@ -78,6 +78,18 @@ namespace InterfaceIssue
         {
             await PerformTest<MessageHasInterfaceAndDoesNotHaveBaseClass>();
         }
+
+        [TestMethod]
+        public async Task TestMessageHasInterfaceAndIncludedInTopologyBaseHasInterface()
+        {
+            await PerformTest<MessageHasInterfaceAndIncludedInTopologyBaseHasInterface>();
+        }
+
+        [TestMethod]
+        public async Task TestMessageHasInterfaceAndExcludedFromTopologyBaseHasInterface()
+        {
+            await PerformTest<MessageHasInterfaceAndExcludedFromTopologyBaseHasInterface>();
+        }
     }
 
     public interface IMyMessageInterface
@@ -131,6 +143,17 @@ namespace InterfaceIssue
     {
         public virtual string message { get; set; } = string.Empty;
     }
+
+    public class MessageHasInterfaceAndIncludedInTopologyBaseHasInterface : BaseClassNotExcludedFromTopologyHavingInterface, IMyMessageInterface
+    {
+        public virtual string message { get; set; } = string.Empty;
+    }
+
+    public class MessageHasInterfaceAndExcludedFromTopologyBaseHasInterface : BaseClassExcludedFromTopologyHavingInterface, IMyMessageInterface
+    {
+        public virtual string message { get; set; } = string.Empty;
+    }
+
 
     public class MessageHasInterfaceAndDoesNotHaveBaseClass : IMyMessageInterface
     {
